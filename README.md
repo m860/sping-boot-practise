@@ -1,1 +1,1 @@
-# sping-boot-practise
+# spring-boot-practise
