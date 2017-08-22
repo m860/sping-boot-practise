@@ -19,10 +19,26 @@ $ ./gradlew bootRun # 运行application
 
 ### 如果在console查看unit test summary?
 
-使用gradle plugin [gradle-console-reporter](https://github.com/ksoichiro/gradle-console-reporter)
+添加如下代码在build.gradle
+```
+test {
+	testLogging {
+		afterSuite { desc, result ->
+			if (!desc.parent) { // will match the outermost suite
+				println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+			}
+		}
+	}
+}
+```
+
+还可以使用gradle plugin [gradle-console-reporter](https://github.com/ksoichiro/gradle-console-reporter),但是没有测试成功
 
 ## TODO
 
 - [x] auto restart & live reload
 - [x] unit test
-- [ ] environment variable
+- [x] environment variable
+- [ ] deploy
+- [ ] doc
+- [ ] log
